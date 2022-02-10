@@ -2,12 +2,8 @@ const express = require('express');
 const route = express.Router();
 const db = require('./db');
 const seed = require('./seed');
-
-
-
 route.get('/', async(req, res, next) => {
     try{
-
         const query = `SELECT * FROM states`;
         const data = await db.query(query);
         const states = data.rows;
@@ -32,17 +28,14 @@ route.get('/', async(req, res, next) => {
                 </div>
             </body>
         </html>`;
-    
         res.send(html);
     }
     catch(ex){
         next(ex);
     }
 })
-
 route.get('/:id', async(req, res, next) => {
     try{
-
         const query = `SELECT * FROM state_details
                         FULL OUTER JOIN states
                         ON state_details.id = states.id 
@@ -81,14 +74,10 @@ route.get('/:id', async(req, res, next) => {
                 </div>
             </body>
         </html>`;
-    
         res.send(html);
     }
     catch(ex){
         next(ex);
     }
-
 }); 
-
-
 module.exports = route;
